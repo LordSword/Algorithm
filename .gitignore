@@ -25,6 +25,7 @@ xcuserdata/
 *.xcscmblueprint
 */.DS_Store
 .DS_Store
+UserInterfaceState.xcuserstate
 
 ## Obj-C/Swift specific
 *.hmap
