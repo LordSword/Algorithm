@@ -114,26 +114,79 @@ extension Array {
     // 给定平面上 n 对 互不相同 的点 points ，其中 points[i] = [xi, yi] 。回旋镖 是由点 (i, j, k) 表示的元组 ，其中 i 和 j 之间的距离和 i 和 k 之间的距离相等（需要考虑元组的顺序）。
     // 返回平面上所有回旋镖的数量。
     func numberOfBoomerangs(_ points: [[Int]]) -> Int {
-            var res = 0
-            var dict = Dictionary<Int, Int>()
-            for i in 0..<points.count {
-                dict.removeAll()
-                for j in 0..<points.count {
-                    if i == j {
-                        continue
-                    }
+        var res = 0
+        var dict = Dictionary<Int, Int>()
+        for i in 0..<points.count {
+            dict.removeAll()
+            for j in 0..<points.count {
+                if i == j {
+                    continue
+                }
+                
+                let dis = (points[j][0] - points[i][0])*(points[j][0] - points[i][0]) + (points[j][1] - points[i][1])*(points[j][1] - points[i][1])
+                
+                if let val = dict[dis] {
+                    res += val
+                } else {
+                    dict[dis] = 0
+                }
+                dict[dis]? += 1
+            }
+        }
+        
+        return 2*res
+    }
+    
+    // leecode 524. 通过删除字母匹配到字典里最长单词
+    // 给你一个字符串 s 和一个字符串数组 dictionary 作为字典，找出并返回字典中最长的字符串，该字符串可以通过删除 s 中的某些字符得到。
+    // 如果答案不止一个，返回长度最长且字典序最小的字符串。如果答案不存在，则返回空字符串。
+    func findLongestWord(_ s: String, _ dictionary: [String]) -> String {
+        
+//        let array = dictionary.sorted { str1, str2 in
+//
+//            if str1.count == str2.count {
+//
+//                return str1.compare(str2) == .orderedAscending
+//            }
+//
+//            return str1.count > str2.count
+//        }
+        var res = ""
+        var pLength = 0
+        var pIndex = 0
+        for str in dictionary {
+            
+            if str.count > s.count {
+                continue
+            }
+            
+            let dValue = s.count - str.count
+            
+            for i in 0..<s.count {
+                
+                if str[pIndex] == s[i] {
                     
-                    let dis = (points[j][0] - points[i][0])*(points[j][0] - points[i][0]) + (points[j][1] - points[i][1])*(points[j][1] - points[i][1])
-
-                    if let val = dict[dis] {
-                        res += val
-                    } else {
-                        dict[dis] = 0
+                    pIndex += 1
+                    pLength += 1
+                    if pLength == str.count {
+                        
+                        if res.count < str.count {
+                            res = str
+                        } else if res.count == str.count, res > str {
+                            res = str
+                        }
+                        break
                     }
-                    dict[dis]? += 1
+                }
+                
+                if (i - pIndex) > dValue {
+                    break
                 }
             }
-
-            return 2*res
+            pLength = 0
+            pIndex = 0
         }
+        
+        return res
+    }
 }

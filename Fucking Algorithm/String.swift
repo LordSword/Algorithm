@@ -137,7 +137,7 @@ extension String {
     subscript (r: Range<Int>) -> String {
         get {
             let start = self.index(self.startIndex, offsetBy: r.lowerBound)
-            let end = self.index(start, offsetBy: r.upperBound)
+            let end = self.index(self.startIndex, offsetBy: r.upperBound)
             return String(self[start..<end])
         }
     }

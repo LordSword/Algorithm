@@ -7,15 +7,20 @@
 
 import Foundation
 
-let palindromicString = "asdfggfdsajkjjkjoplsaasdfghjklkjhgfdsa"
-print(palindromicString.maxPalindromicSubstringLength())
+//let palindromicString = "asdfggfdsajkjjkjoplsaasdfghjklkjhgfdsa"
+//print(palindromicString.maxPalindromicSubstringLength())
+//
+//let str1 = "ababac"
+//print(str1.validPalindromicCanDeleteOneChar())
+//
+//let str2 = "232sdhfksdhfjkdshfks"
+//print("\(str2.maxLengthBetweenInSameChar()) sum-\(str2.count)")
+//
+//let arr1 = [1, 2, 4, 7, 10, 2, 1, 6, 1, 1]
+//print(arr1.combinationSum(arr1, 6))
 
-let str1 = "ababac"
-print(str1.validPalindromicCanDeleteOneChar())
+//let arr = ["ale","apple","monkey","plea"]
+let arr = ["abr","abc","monkey","plea"]
 
-let str2 = "232sdhfksdhfjkdshfks"
-print("\(str2.maxLengthBetweenInSameChar()) sum-\(str2.count)")
-
-let arr1 = [1, 2, 4, 7, 10, 2, 1, 6, 1, 1]
-print(arr1.combinationSum(arr1, 6))
+print(arr.findLongestWord("abrc", arr))
 
