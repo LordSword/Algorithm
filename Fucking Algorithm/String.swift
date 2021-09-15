@@ -150,11 +150,11 @@ extension String {
         }
     }
     
-    func substring(to:Int) -> String{
+    func substring(to:Int) -> String {
         return self[0..<to]
     }
     
-    func substring(from:Int) -> String{
+    func substring(from:Int) -> String {
         return self[from..<self.count]
     }
 }

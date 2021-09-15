@@ -5,7 +5,7 @@
 //  Created by Sword on 2021/9/8.
 //
 
-import Foundation
+import Cocoa
 
 extension Array {
     
@@ -249,5 +249,46 @@ extension Array {
                 return maxNumIndexInArray(nums, (center + right)/2, center, right)
             }
         }
+    }
+    
+    // leecode 1048. 最长字符串链
+    // 给出一个单词列表，其中每个单词都由小写英文字母组成。
+    // 如果我们可以在 word1 的任何地方添加一个字母使其变成 word2，那么我们认为 word1 是 word2 的前身。例如，"abc" 是 "abac" 的前身。
+    // 词链是单词 [word_1, word_2, ..., word_k] 组成的序列，k >= 1，其中 word_1 是 word_2 的前身，word_2 是 word_3 的前身，依此类推。
+    // 从给定单词列表 words 中选择单词组成词链，返回词链的最长可能长度。
+    func longestStrChain(_ words: [String]) -> Int {
+        
+        let arr = words.sorted { str1, str2 in
+            return str1.count < str2.count
+        }
+        
+        var dp = Dictionary<String, Int>()
+        
+        for str in arr {
+            if 1 == str.count {
+                dp[str] = 1
+                continue
+            }
+            
+            for i in 0..<str.count {
+                
+                var clipStr = ""
+                if i > 0 {
+                    clipStr.append(str.substring(to: i))
+                }
+                if i < str.count - 1 {
+                    clipStr.append(str.substring(from: i + 1))
+                }
+                
+                dp[str] = Swift.max( dp[str] ?? 0, (dp[clipStr] ?? 0) + 1)
+            }
+        }
+        
+        var res = 0
+        for (_, value) in dp {
+            res = Swift.max(res, value)
+        }
+        
+        return res
     }
 }
