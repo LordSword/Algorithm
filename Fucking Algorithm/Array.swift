@@ -215,4 +215,39 @@ extension Array {
         
         return dp[days[1]]
     }
+    
+    // leecode 162. 寻找峰值
+    // 峰值元素是指其值严格大于左右相邻值的元素。
+    // 给你一个整数数组 nums，找到峰值元素并返回其索引。数组可能包含多个峰值，在这种情况下，返回 任何一个峰值 所在位置即可。
+    // 你可以假设 nums[-1] = nums[n] = -∞ 。
+    // 你必须实现时间复杂度为 O(log n) 的算法来解决此问题
+    func findPeakElement(_ nums: [Int]) -> Int {
+        
+        if nums.count < 2 {
+            return 0
+        }
+        
+        return maxNumIndexInArray(nums, nums.count/2, 0, nums.count - 1)
+    }
+    
+    func maxNumIndexInArray(_ nums: [Int], _ center: Int, _ left: Int, _ right: Int) -> Int {
+        
+        if nums[left] > nums[left + 1] {
+            return left
+        } else if nums[right] > nums[right - 1] {
+            return right
+        }
+        
+        if nums[center] > nums[center - 1], nums[center] > nums[center + 1] {
+            return center
+        } else {
+            
+            if nums[center - 1] > nums[center] {
+                
+                return maxNumIndexInArray(nums, (left + center - 1)/2, left, center - 1)
+            } else {
+                return maxNumIndexInArray(nums, (center + right)/2, center, right)
+            }
+        }
+    }
 }
