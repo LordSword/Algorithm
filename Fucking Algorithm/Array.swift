@@ -291,4 +291,85 @@ extension Array {
         
         return res
     }
+    
+    // leecode 212. 单词搜索 II
+    // 给定一个 m x n 二维字符网格 board 和一个单词（字符串）列表 words，找出所有同时在二维网格和字典中出现的单词。
+    // 单词必须按照字母顺序，通过 相邻的单元格 内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母在一个单词中不允许被重复使用。
+    // 字典树
+    func findWords(_ board: [[String]], _ words: [String]) -> [String] {
+
+        let head = findWordsTrie()
+        
+        // 生成字典树
+        for word in words {
+            var cur = head
+            for char in word {
+                
+                if nil == cur.container[String(char)] {
+                    cur.container[String(char)] = findWordsTrie()
+                }
+                cur = cur.container[String(char)]!
+            }
+            cur.word = word
+        }
+        
+        var res = Set<String>()
+        var tmpBoard = board
+        
+        for i in 0..<board.count {
+            for j in 0..<board[0].count {
+                findWordsDfs(&tmpBoard, head, &res, i, j)
+            }
+        }
+        return Array<String>(res)
+    }
+    
+    func findWordsDfs(_ board:inout [[String]],_ trie: findWordsTrie, _ res:inout Set<String>, _ i: Int, _ j: Int) {
+        if i < 0 || i >= board.count || j < 0 || j >= board[0].count {
+            return
+        }
+        
+        // 正常思路，全部遍历
+//        let char = board[i][j]
+//
+//        guard (nil != trie.container[char]) else {
+//            return
+//        }
+//
+//        if trie.container[char]!.word.count > 0 {
+//            res.insert(trie.container[char]!.word)
+//        }
+//
+//        board[i][j] = "-"
+//        for (i, j) in [(i, j+1), (i, j-1), (i+1, j), (i-1, j)] {
+//            findWordsDfs(&board, trie.container[char]!, &res, i, j)
+//        }
+//        board[i][j] = char
+        
+        // 优化 只遍历一边这个路径，因为路径上所有单词只需要一次就能拿到
+        let char = board[i][j]
+        let next = trie.container[char]
+
+        if let word = next?.word, word.count > 0 {
+            res.insert(word)
+        }
+        
+        if let nxt = next, nxt.container.count > 0 {
+            board[i][j] = "-"
+            for (i, j) in [(i, j+1), (i, j-1), (i+1, j), (i-1, j)] {
+                findWordsDfs(&board, nxt, &res, i, j)
+            }
+            board[i][j] = char
+        }
+
+        if 0 == next?.container.count {
+            trie.container[char] = nil
+        }
+    }
+}
+
+class findWordsTrie {
+    
+    var container = Dictionary<String, findWordsTrie>()
+    var word = ""
 }
