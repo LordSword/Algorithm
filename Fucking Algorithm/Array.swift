@@ -366,6 +366,77 @@ extension Array {
             trie.container[char] = nil
         }
     }
+    
+    // leecode 36. 有效的数独
+    // 请你判断一个 9x9 的数独是否有效。只需要 根据以下规则 ，验证已经填入的数字是否有效即可。
+    // 数字 1-9 在每一行只能出现一次。
+    // 数字 1-9 在每一列只能出现一次。
+    // 数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。（请参考示例图）
+    // 数独部分空格内已填入了数字，空白格用 '.' 表示。
+    // 注意：
+    // 一个有效的数独（部分已被填充）不一定是可解的。
+    // 只需要根据以上规则，验证已经填入的数字是否有效即可。
+    func isValidSudoku(_ board: [[Character]]) -> Bool {
+        
+        var chars = [Character]()
+        // 检查横向
+        for arr in board {
+            
+            for char in arr {
+                if !char.isWholeNumber {
+                    continue
+                }
+                
+                if chars.contains(char) {
+                    return false
+                }
+                chars.append(char)
+            }
+            
+            chars.removeAll()
+        }
+        
+        // 检查竖向
+        for i in 0..<9 {
+            for j in 0..<9 {
+                
+                let char = board[j][i]
+                if !char.isWholeNumber {
+                    continue
+                }
+    
+                if chars.contains(char) {
+                    return false
+                }
+                
+                chars.append(char)
+            }
+            chars.removeAll()
+        }
+        
+        // 检查3*3单元格
+        for (i, j) in [(0, 0), (0, 3), (0, 6), (3, 0), (3, 3), (3, 6), (6, 0), (6, 3), (6, 6)] {
+            
+            for h in 0..<3 {
+                for v in 0..<3 {
+                    
+                    let char = board[h + i][v + j]
+                    if !char.isWholeNumber {
+                        continue
+                    }
+        
+                    if chars.contains(char) {
+                        return false
+                    }
+                    
+                    chars.append(char)
+                }
+            }
+            chars.removeAll()
+        }
+        
+        return true
+    }
 }
 
 class findWordsTrie {
