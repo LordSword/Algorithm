@@ -437,6 +437,39 @@ extension Array {
         
         return true
     }
+    
+    // lecode 718. 最长重复子数组
+    // 给两个整数数组 A 和 B ，返回两个数组中公共的、长度最长的子数组的长度
+    func findLength(_ nums1: [Int], _ nums2: [Int]) -> Int {
+        
+        return Swift.max(maxLength(nums1, nums2), maxLength(nums2, nums1))
+    }
+    func maxLength(_ nums1: [Int], _ nums2: [Int]) -> Int {
+        var res = 0
+        
+        for i in 0..<nums1.count {
+            
+            var max = 0
+            var k = 0
+            for j in 0..<nums2.count {
+                
+                if i + j >= nums1.count {
+                    break
+                }
+                
+                if nums1[i + j] == nums2[j] {
+                    k += 1
+                } else {
+                    k = 0
+                }
+                max = Swift.max(max, k)
+            }
+            
+            res = Swift.max(res, max)
+        }
+        
+        return res
+    }
 }
 
 class findWordsTrie {
