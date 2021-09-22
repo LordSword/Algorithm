@@ -123,6 +123,15 @@ extension String {
         
         return result
     }
+    
+    //leecode 58 最后一个单词的长度
+    
+    func lengthOfLastWord(_ s: String) -> Int {
+        
+        let arr = s.split(separator: " ")
+        
+        return arr.last?.count ?? 0
+    }
 }
 
 //MARK: - 截取字符串

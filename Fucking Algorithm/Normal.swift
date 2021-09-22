@@ -62,3 +62,49 @@ func pow2(_ a:Double, _ n:Int) -> Double {
 func canWinNim(_ n: Int) -> Bool {
     return 0 != n%4
 }
+
+// lecode 725. 分隔链表
+// 给你一个头结点为 head 的单链表和一个整数 k ，请你设计一个算法将链表分隔为 k 个连续的部分。
+// 每部分的长度应该尽可能的相等：任意两部分的长度差距不能超过 1 。这可能会导致有些部分为 null 。
+// 这 k 个部分应该按照在链表中出现的顺序排列，并且排在前面的部分的长度应该大于或等于排在后面的长度。
+// 返回一个由上述 k 部分组成的数组。
+func splitListToParts(_ head: ListNode?, _ k: Int) -> [ListNode?] {
+    
+    var res = [ListNode?]()
+
+    guard k > 0 else {
+        return res
+    }
+    
+    
+    var node = head
+    var count = 0
+    
+    while nil != node {
+        count += 1
+        node = node?.next
+    }
+    
+    let i = count/k
+    let j = count%k
+    
+    node = head
+    for tmpI in 0..<k {
+        
+        res.append(node)
+        var tmpCount = i + (tmpI < j ? 1:0);
+        
+        while nil != node, tmpCount > 0 {
+            
+            let tmpNode = node?.next
+            if 1 == tmpCount {
+                node?.next = nil
+            }
+            tmpCount -= 1
+            node = tmpNode
+        }
+    }
+    
+    return res
+}
+
