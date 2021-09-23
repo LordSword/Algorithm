@@ -470,6 +470,44 @@ extension Array {
         
         return res
     }
+    
+    // leecode 673. 最长递增子序列的个数
+    // 给定一个未排序的整数数组，找到最长递增子序列的个数。
+    func findNumberOfLIS(_ nums: [Int]) -> Int {
+        
+        var dp = [Int](repeating: 0, count: nums.count)
+        var cnt = [Int](repeating: 0, count: nums.count)
+        var res = 0
+        var maxLength = 0
+        
+        for i in 0..<nums.count {
+            dp[i] = 1
+            cnt[i] = 1
+            
+            for j in 0..<i {
+                
+                if nums[i] > nums[j] {
+                    
+                    if dp[j] + 1 > dp[i] {
+                        
+                        dp[i] = dp[j] + 1
+                        cnt[i] = cnt[j]
+                    } else if dp[j] + 1 == dp[i] {
+                        cnt[i] += cnt[j]
+                    }
+                }
+            }
+            
+            if dp[i] > maxLength {
+                maxLength = dp[i]
+                res = cnt[i]
+            } else if dp[i] == maxLength {
+                res += cnt[i]
+            }
+        }
+
+        return res
+    }
 }
 
 class findWordsTrie {

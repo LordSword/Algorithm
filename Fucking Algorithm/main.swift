@@ -43,5 +43,8 @@ import Foundation
 //           [".",".","4",".",".",".",".",".","."]]
 //print(arr.isValidSudoku(arr))
 
-let arr = [0,0,0,0,1]
-print(arr.findLength(arr, [1,0,0,0,0]))
+//let arr = [0,0,0,0,1]
+//print(arr.findLength(arr, [1,0,0,0,0]))
+
+let arr = [1,3,5,4,7]
+print(arr.findNumberOfLIS(arr))
