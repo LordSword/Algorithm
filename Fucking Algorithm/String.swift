@@ -125,19 +125,117 @@ extension String {
     }
     
     //leecode 58 最后一个单词的长度
-    
     func lengthOfLastWord(_ s: String) -> Int {
         
         let arr = s.split(separator: " ")
         
         return arr.last?.count ?? 0
+
+    }
+    
+    // leecode 583. 两个字符串的删除操作
+    // 给定两个单词 word1 和 word2，找到使得 word1 和 word2 相同所需的最小步数，每步可以删除任意一个字符串中的一个字符。
+    func minDistance(_ word1: String, _ word2: String) -> Int {
+        
+        var dp = [[Int]]()
+        
+        for i in 0...word1.count {
+            
+            for j in 0...word2.count {
+                
+                if 0 == j {
+                    var arr = [Int]()
+                    arr.append(i)
+                    dp.append(arr)
+                    continue
+                }
+                
+                if 0 == i {
+                    dp[0].append(j)
+                    continue
+                }
+                
+                let char1 = word1[i - 1]
+                let char2 = word2[j - 1]
+                
+                if char1 == char2 {
+                    dp[i].append(dp[i - 1][j - 1])
+                } else {
+                    dp[i].append(min(dp[i - 1][j], dp[i][j - 1]) + 1)
+                }
+            }
+        }
+        
+        return dp[word1.count][word2.count]
+    }
+    
+    // leecode 639. 解码方法 II
+    func numDecodings(_ s: String) -> Int {
+        
+        var arr = [Character]()
+        for i in s {
+            arr.append(i)
+        }
+        
+        if "0" == arr[0] {
+            return 0
+        }
+        
+        let mod:Int = Int(1e9 + 7)
+        var dp = [Int](repeating: 0, count: s.count + 1)
+        dp[0] = 1
+        
+        for i in 1...arr.count {
+            dp[i] = (dp[i - 1] * check1Digit(arr[i - 1]))%mod
+            
+            if i > 1 {
+                dp[i] = (dp[i] + dp[i - 2]*check2Digit(arr[i - 2], arr[i - 1]))%mod
+            }
+        }
+        return dp[s.count]
+    }
+    func check1Digit(_ char: Character) -> Int {
+        
+        if "0" == char {
+            return 0
+        }
+        
+        return "*" == char ? 9:1
+    }
+    func check2Digit(_ char1: Character, _ char2: Character) -> Int {
+        
+        if "0" == char1 {
+            return 0
+        }
+        
+        if "*" == char1, "*" == char2 {
+            return 15
+        }
+        
+        if "*" == char1 {
+            return char2 <= "6" ? 2:1
+        }
+
+        if "*" == char2 {
+            
+            if "1" == char1 {
+                return 9
+            }
+            
+            if "2" == char1 {
+                return 6
+            }
+            return 0
+        }
+        
+        return (("1" == char1) || ("2" == char1 && char2 <= "6")) ? 1:0
     }
 }
 
 //MARK: - 截取字符串
 extension String {
     
-    subscript (i:Int) -> String {
+    subscript (i: Int) -> String {
         let start = self.index(self.startIndex, offsetBy: i)
         let end = self.index(start, offsetBy: 1)
         return String(self[start..<end])
@@ -151,7 +249,7 @@ extension String {
         }
     }
     
-    subscript (index:Int , length:Int) -> String {
+    subscript (index: Int, length: Int) -> String {
         get {
             let start = self.index(self.startIndex, offsetBy: index)
             let end = self.index(start, offsetBy: length)
@@ -159,11 +257,11 @@ extension String {
         }
     }
     
-    func substring(to:Int) -> String {
+    func substring(to: Int) -> String {
         return self[0..<to]
     }
     
-    func substring(from:Int) -> String {
+    func substring(from: Int) -> String {
         return self[from..<self.count]
     }
 }

@@ -508,10 +508,70 @@ extension Array {
 
         return res
     }
+    
+    // leecode 1723. 完成所有工作的最短时间
+    // 给你一个整数数组 jobs ，其中 jobs[i] 是完成第 i 项工作要花费的时间。
+    // 请你将这些工作分配给 k 位工人。所有工作都应该分配给工人，且每项工作只能分配给一位工人。工人的 工作时间 是完成分配给他们的所有工作花费时间的总和。请你设计一套最佳的工作分配方案，使工人的 最大工作时间 得以 最小化 。
+    // 返回分配方案中尽可能 最小 的 最大工作时间 。
+    // 错误解法
+    func minimumTimeRequired(_ jobs: [Int], _ k: Int) -> Int {
+        
+        let soredJobs = jobs.sorted { i, j in
+            return i > j
+        }
+        
+        let val = sumOfIntArray(jobs)/k
+        let max = soredJobs.first!
+        
+        var dp = [[Int]]()
+        for _ in 0..<k {
+            dp.append([Int]())
+        }
+        
+        for i in soredJobs {
+            
+            var minIndex = 0
+            var minValue = sumOfIntArray(dp[0])
+            for j in 0..<dp.count {
+                
+                let tmp = sumOfIntArray(dp[j])
+                
+                if 0 == tmp || tmp + i <= max || tmp + i <= val {
+                    minIndex = j
+                    break
+                } else if minValue > tmp {
+                    minValue = tmp
+                    minIndex = j
+                }
+            }
+            
+            dp[minIndex].append(i)
+        }
+                
+        var res = 0
+        for i in dp {
+            res = Swift.max(res, sumOfIntArray(i))
+        }
+        
+        return res
+    }
 }
 
 class findWordsTrie {
     
     var container = Dictionary<String, findWordsTrie>()
     var word = ""
+}
+
+extension Array {
+    
+    func sumOfIntArray(_ arr: [Int]) -> Int {
+        var res = 0
+        
+        for i in arr {
+            res += i
+        }
+        
+        return res
+    }
 }

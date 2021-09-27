@@ -108,3 +108,38 @@ func splitListToParts(_ head: ListNode?, _ k: Int) -> [ListNode?] {
     return res
 }
 
+// leecode 430. 扁平化多级双向链表
+// 深度优先遍历
+func flatten(_ head: FlattenNode?) -> FlattenNode? {
+    
+    flattenNode(head)
+    return head
+}
+@discardableResult
+func flattenNode(_ head: FlattenNode?) -> (head: FlattenNode?, tail: FlattenNode?) {
+    
+    var tmpHead = head
+    var tail:FlattenNode?
+    
+    while nil != tmpHead {
+        
+        if nil != tmpHead?.child {
+            let flatten = flattenNode(tmpHead?.child)
+            tmpHead?.child = nil
+            
+            // 尾部交换
+            flatten.tail?.next = tmpHead?.next
+            tmpHead?.next?.prev = flatten.tail
+            
+            // 头部交换
+            tmpHead?.next = flatten.head
+            flatten.head?.prev = tmpHead
+            
+            tmpHead = flatten.tail
+        }
+        tail = tmpHead
+        tmpHead = tmpHead?.next
+    }
+    
+    return (head, tail)
+}

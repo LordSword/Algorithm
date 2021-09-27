@@ -46,5 +46,12 @@ import Foundation
 //let arr = [0,0,0,0,1]
 //print(arr.findLength(arr, [1,0,0,0,0]))
 
-let arr = [1,3,5,4,7]
-print(arr.findNumberOfLIS(arr))
+//let arr = [1,3,5,4,7]
+//print(arr.findNumberOfLIS(arr))
+
+//let str = "test"
+//print(str.minDistance("algorithm", "altruistic"))
+
+let arr =
+    [6518448,8819833,7991995,7454298,2087579,380625,4031400,2905811,4901241,8480231,7750692,3544254]
+print(arr.minimumTimeRequired(arr, 4))
