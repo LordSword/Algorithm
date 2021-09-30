@@ -143,3 +143,39 @@ func flattenNode(_ head: FlattenNode?) -> (head: FlattenNode?, tail: FlattenNode
     
     return (head, tail)
 }
+
+// leecode 223. 矩形面积
+// 给你 二维 平面上两个 由直线构成的 矩形，请你计算并返回两个矩形覆盖的总面积。
+// 每个矩形由其 左下 顶点和 右上 顶点坐标表示：
+// 第一个矩形由其左下顶点 (ax1, ay1) 和右上顶点 (ax2, ay2) 定义。
+// 第二个矩形由其左下顶点 (bx1, by1) 和右上顶点 (bx2, by2) 定义。
+func computeArea(_ ax1: Int, _ ay1: Int, _ ax2: Int, _ ay2: Int, _ bx1: Int, _ by1: Int, _ bx2: Int, _ by2: Int) -> Int {
+    
+    let aArea = (ax2 - ax1) * (ay2 - ay1)
+    let bArea = (bx2 - bx1) * (by2 - by1)
+    
+    var x = 0
+    let xDistance = bx1 - ax1
+    if xDistance >= 0 {
+        // b在a的右边
+        x = min(bx2 - bx1, ax2 - ax1 - xDistance)
+    } else {
+        // b在a的左边
+        x = min(ax2 - ax1, bx2 - bx1 + xDistance)
+    }
+    
+    var y = 0
+    let yDistance = by1 - ay1
+    if yDistance >= 0 {
+        y = min(by2 - by1, ay2 - ay1 - yDistance)
+    } else {
+        y = min(ay2 - ay1, by2 - by1 + yDistance )
+    }
+    
+    var area = 0
+    if x > 0, y > 0 {
+        area = x * y
+    }
+    
+    return bArea + aArea - area
+}
