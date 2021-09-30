@@ -179,3 +179,13 @@ func computeArea(_ ax1: Int, _ ay1: Int, _ ax2: Int, _ ay2: Int, _ bx1: Int, _ b
     
     return bArea + aArea - area
 }
+
+// 最大公约数，欧几里德算法 gcd(a, b) = gcd(a, a%b)
+func gcd(_ a:Int, _ b:Int) -> Int {
+    let r = a%b
+    if 0 != r {
+        return gcd(b, r)
+    } else {
+        return b
+    }
+}

@@ -9,6 +9,38 @@ import Cocoa
 
 extension Array {
     
+    // leecode 189. 旋转数组
+    // 给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。
+    // O(1)
+    // 环状代替，最优解法为数组翻转，然后分别翻转0..<k, k..<n-1
+    func rotate(_ nums: inout [Int], _ k: Int) {
+        
+        let m = k%(nums.count)
+        if 0 == m {
+            return
+        }
+        
+        var tmp = 0
+        var start = 0
+        var next = 0
+        
+        print(gcd(m, nums.count))
+        
+        for i in 0..<gcd(m, nums.count) {
+            
+            start = i
+            tmp = nums[start]
+            
+            repeat {
+                next = (start + m)%nums.count
+                let tmpA = nums[next]
+                nums[next] = tmp
+                tmp = tmpA
+                start = next
+            } while i != next
+        }
+    }
+    
     // leecode 517. 超级洗衣机
     // 假设有 n 台超级洗衣机放在同一排上。开始的时候，每台洗衣机内可能有一定量的衣服，也可能是空的。
     // 在每一步操作中，你可以选择任意 m (1 <= m <= n) 台洗衣机，与此同时将每台洗衣机的一件衣服送到相邻的一台洗衣机。
