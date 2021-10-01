@@ -9,6 +9,31 @@ import Cocoa
 
 extension Array {
     
+    // leecode 1436. 旅行终点站
+    func destCity(_ paths: [[String]]) -> String {
+            var start = [String]()
+            var end = [String]()
+            
+            for arr in paths {
+                let s = arr.first!
+                let e = arr.last!
+                
+                if start.contains(e) {
+                    start.remove(at: start.firstIndex(of: e)!)
+                } else {
+                    end.append(e)
+                }
+                
+                if end.contains(s){
+                    end.remove(at: end.firstIndex(of: s)!)
+                } else {
+                    start.append(s)
+                }
+            }
+
+            return end.last!
+        }
+    
     // leecode 189. 旋转数组
     // 给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。
     // O(1)
