@@ -9,6 +9,37 @@ import Cocoa
 
 extension String {
     
+    // leecode 187. 重复的DNA序列
+    // 所有 DNA 都由一系列缩写为 'A'，'C'，'G' 和 'T' 的核苷酸组成，例如："ACGAATTCCG"。在研究 DNA 时，识别 DNA 中的重复序列有时会对研究非常有帮助。
+    // 编写一个函数来找出所有目标子串，目标子串的长度为 10，且在 DNA 字符串 s 中出现次数超过一次。
+    func findRepeatedDnaSequences(_ s: String) -> [String] {
+        
+        let arr = Array(s)
+        var map = [String:Int]()
+        
+        for i in 0..<(arr.count - 10) {
+            
+            let s = String( arr[i..<(i + 10)])
+            
+            if let value = map[s] {
+                
+                map[s] = value + 1
+            } else {
+                map[s] = 1
+            }
+        }
+        
+        var result = [String]()
+        
+        for (key, value) in map {
+            if value > 1 {
+                result.append(key)
+            }
+        }
+        
+        return result
+    }
+    
     // 字符串中的最大回文字符串长度 (Manacher算法)
     func maxPalindromicSubstringLength() -> Int {
         
