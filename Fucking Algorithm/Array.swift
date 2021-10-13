@@ -595,6 +595,62 @@ extension Array {
 
         return res
     }
+    // leecode 300. 最长递增子序列
+    func lengthOfLIS(_ nums: [Int]) -> Int {
+        // 动态规划
+//        var dp = [Int](repeating:1, count:nums.count)
+//
+//        for i in 1..<nums.count {
+//
+//            for j in 0..<i {
+//
+//                if nums[i] > nums[j] {
+//                    dp[i] = Swift.max(dp[i], dp[j] + 1)
+//                }
+//            }
+//        }
+//
+//        var res = 0
+//
+//        for i in dp {
+//            res = Swift.max(res, i)
+//        }
+//
+//        return res
+        // 贪心二分
+        var d = [Int](repeating: 0, count: nums.count + 1)
+        var len = 1
+        d[len] = nums[0]
+        
+        for i in 1..<nums.count {
+            
+            // 如果当前数字大于最后一个数，添加到后面
+            if nums[i] > d[len] {
+                len += 1
+                d[len] = nums[i]
+            } else {
+                // 如果当前数字小于最后一个数字，将查找最小大雨num[i]的数字替换掉
+                var l = 1
+                var r = len
+                var pos = 0
+                
+                while l < r {
+                    let mid = (l + r)/2
+                    
+                    if d[mid] >= nums[i] {
+                        r = mid - 1
+                    } else {
+                        l = mid + 1
+                        pos = mid
+                    }
+                }
+                
+                d[1 + pos] = nums[i]
+            }
+        }
+        
+        return len
+    }
     
     // leecode 1723. 完成所有工作的最短时间
     // 给你一个整数数组 jobs ，其中 jobs[i] 是完成第 i 项工作要花费的时间。
