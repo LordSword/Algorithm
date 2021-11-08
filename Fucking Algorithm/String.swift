@@ -9,6 +9,75 @@ import Cocoa
 
 extension String {
     
+    // leecode 299. 猜数字游戏
+    func getHint(_ secret: String, _ guess: String) -> String {
+        // 第二种
+        var a = 0, b = 0
+        let ascii0 = Character("0").asciiValue!
+        var nums = Array<Int>(repeating: 0, count: 10)
+        
+        for (c1, c2) in zip(secret, guess) {
+            
+            if c1 == c2 {
+                a += 1
+            } else {
+                
+                let i = Int(c1.asciiValue! - ascii0)
+                let j = Int(c2.asciiValue! - ascii0)
+                
+                // 说明c1在前面guess出现过
+                if nums[i] < 0 {
+                    b += 1
+                }
+                // 说明c2在secret出现过
+                if nums[j] > 0 {
+                    b += 1
+                }
+                
+                nums[i] += 1
+                nums[j] -= 1
+            }
+        }
+        
+        
+        // 第一种
+//        var secrets = Array(secret)
+//        var guesses = Array(guess)
+//
+//        var i = 0
+//        var mapChar = [Int]()
+//
+//        while i < secrets.count, i < guesses.count {
+//
+//            if secrets[i] == guesses[i] {
+//                mapChar.append(i)
+//            }
+//
+//            i += 1
+//        }
+//
+//        let a = mapChar.count
+//
+//        for i in mapChar.reversed() {
+//
+//            secrets.remove(at: i)
+//            guesses.remove(at: i)
+//        }
+//
+//        var b = 0
+//
+//        for char in guesses {
+//
+//            if secrets.contains(char) {
+//                secrets.remove(at: secrets.firstIndex(of: char) ?? 0)
+//                b += 1
+//            }
+//        }
+//
+//
+        return "\(a)A\(b)B"
+    }
+    
     // leecode 187. 重复的DNA序列
     // 所有 DNA 都由一系列缩写为 'A'，'C'，'G' 和 'T' 的核苷酸组成，例如："ACGAATTCCG"。在研究 DNA 时，识别 DNA 中的重复序列有时会对研究非常有帮助。
     // 编写一个函数来找出所有目标子串，目标子串的长度为 10，且在 DNA 字符串 s 中出现次数超过一次。
