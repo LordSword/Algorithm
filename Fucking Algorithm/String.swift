@@ -9,6 +9,20 @@ import Cocoa
 
 extension String {
     
+    // leecode 557. 反转字符串中的单词 III
+    func reverseWords(_ s: String) -> String {
+        
+        var array = s.split(separator: " ")
+        
+        for i in 0..<array.count {
+            
+            let str = String(array[i])
+            array[i] = Substring( str.reversed())
+        }
+        
+        return array.joined(separator: " ")
+    }
+    
     // leecode 299. 猜数字游戏
     func getHint(_ secret: String, _ guess: String) -> String {
         // 第二种
