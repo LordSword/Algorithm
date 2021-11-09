@@ -9,6 +9,50 @@ import Cocoa
 
 extension Array {
     
+    // leecode 542. 01矩阵
+    func updateMatrix(_ mat: [[Int]]) -> [[Int]] {
+        let dirs = [[-1,0], [1,0], [0, -1], [0, 1]]
+        
+        let m = mat.count, n = mat[0].count
+        
+        var res = [[Int]](repeating:[Int](repeating:0, count:n), count:m)
+        var seen = res
+        var quene = [(Int, Int)]()
+        
+        for i in 0..<m {
+            for j in 0..<n {
+                
+                if 0 == mat[i][j] {
+                    res[i][j] = 0
+                    seen[i][j] = 1
+                    
+                    quene.append((i, j))
+                }
+            }
+        }
+        
+        while (!quene.isEmpty)  {
+        
+            let (x, y) = quene.first!
+            quene.removeFirst()
+            
+            for i in 0..<4 {
+                
+                let nx = dirs[i][0] + x
+                let ny = dirs[i][1] + y
+                
+                if (nx >= 0 && nx < m && ny >= 0 && ny < n && (0 == seen[nx][ny])) {
+                    res[nx][ny] = res[x][y] + 1
+                    seen[nx][ny] = 1
+                    
+                    quene.append((nx, ny))
+                }
+            }
+        }
+        
+        return res
+    }
+    
     // leecode 1436. 旅行终点站
     func destCity(_ paths: [[String]]) -> String {
             var start = [String]()
