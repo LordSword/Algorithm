@@ -356,19 +356,19 @@ extension String {
     }
     
     subscript (r: Range<Int>) -> String {
-        get {
+//        get {
             let start = self.index(self.startIndex, offsetBy: r.lowerBound)
             let end = self.index(self.startIndex, offsetBy: r.upperBound)
             return String(self[start..<end])
-        }
+//        }
     }
     
     subscript (index: Int, length: Int) -> String {
-        get {
+//        get {
             let start = self.index(self.startIndex, offsetBy: index)
             let end = self.index(start, offsetBy: length)
             return String(self[start..<end])
-        }
+//        }
     }
     
     func substring(to: Int) -> String {

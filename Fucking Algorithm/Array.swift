@@ -9,6 +9,143 @@ import Cocoa
 
 extension Array {
     
+    // leecode 563. 二叉树的坡度
+    func findTilt(_ root: TreeNode?) -> Int {
+        
+        return calTreeTilt(root).1
+    }
+    
+    func calTreeTilt(_ root: TreeNode?) -> (Int, Int) {
+        
+        guard let node = root else {
+            return (0, 0)
+        }
+        
+        let left = calTreeTilt(node.left)
+        let right = calTreeTilt(node.right)
+        
+        return (node.val + left.0 + right.0, left.1 + right.1 + abs(left.0 - right.0))
+    }
+    
+    /*
+     // 小伟子胡诌题
+     有一个对象，有两个属性 a，b。  都是正整数。
+     N个这样的对象组成一个数组 x[]，让你找出来 三个对象 i,j,k
+     要求这三个对象在数组是顺序排列，
+     每个对象的 a 属性的值，是逐渐增加。 即 x[i].a <= x[j].a <= x[k].a
+     求出，数字最小的 x[i].b + x[j].b + x[k].b
+     数组中没有满足条件的 i,j,k 的时候，返回 -1
+     输入：
+     第一行是数组个数
+     第二个是对象的 a 属性的值
+     第二个是对象的 b 属性的值
+
+     实例
+     8
+     9 8 6 7 7 2 9 2
+     9 1 10 8 6 4 8 6
+     */
+    func minValue(_ nums:[[Int]]) -> Int {
+
+        guard nums.count > 2 else {
+            return -1
+        }
+        
+        // 升序坐标数组
+        var indexes = [[Int]]()
+
+        for i in 0..<nums.count {
+
+            let a = nums[i][0]
+            
+            var didAppend = false
+            
+            for j in 0..<indexes.count {
+                
+                if a < nums[indexes[j].last!][0] {
+                    continue
+                }
+                
+                if a == nums[indexes[j].last!][0] {
+                    // 可优化替代当前序列(根据b值)
+                    var copyArr = indexes[j]
+                    copyArr.removeLast()
+                    copyArr.append(i)
+                    indexes.append(copyArr)
+                } else {
+                    indexes[j].append(i)
+                    
+                }
+                
+                didAppend = true
+            }
+            
+            if !didAppend {
+                indexes.append([i])
+            }
+        }
+        
+        var res:Int?
+        // 可优化合并到升序计算
+        for arr in indexes {
+                        
+            if arr.count < 3 {
+                continue
+            }
+            
+            // 找出三个最小的数字
+            var min = Int.max, mid = Int.max, max = Int.max
+            
+            for i in arr {
+                let b = nums[i][1]
+                
+                if b < min {
+                    max = mid
+                    mid = min
+                    min = b
+                } else if b < mid {
+                    max = mid
+                    mid = b
+                } else if b < max {
+                    max = b
+                }
+            }
+            
+            res = Swift.min(res ?? Int.max, min*mid*max)
+        }
+
+        return res ?? -1
+    }
+    
+    // leecode 318. 最大单词长度乘积
+    func maxProduct(_ words: [String]) -> Int {
+    
+        let charZero = Character("a").asciiValue!
+        var mask = [Int](repeating: 0, count: words.count)
+        
+        for (index, str) in zip(0..., words) {
+            
+            
+            for char in str {
+                mask[index] |= 1 << (char.asciiValue! - charZero)
+            }
+        }
+        
+        var res = 0
+        
+        for i in 0..<mask.count {
+            
+            for j in (i + 1)..<mask.count {
+                
+                if 0 == mask[i] & mask[j] {
+                    res = Swift.max(res, words[i].count * words[j].count)
+                }
+            }
+        }
+        
+        return res
+    }
+
     // leecode 542. 01矩阵
     func updateMatrix(_ mat: [[Int]]) -> [[Int]] {
         let dirs = [[-1,0], [1,0], [0, -1], [0, 1]]

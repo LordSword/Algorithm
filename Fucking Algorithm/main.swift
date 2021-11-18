@@ -52,6 +52,25 @@ import Foundation
 //let str = "test"
 //print(str.minDistance("algorithm", "altruistic"))
 
-let arr =
-    [6518448,8819833,7991995,7454298,2087579,380625,4031400,2905811,4901241,8480231,7750692,3544254]
-print(arr.minimumTimeRequired(arr, 4))
+//let arr =
+//    [6518448,8819833,7991995,7454298,2087579,380625,4031400,2905811,4901241,8480231,7750692,3544254]
+//print(arr.minimumTimeRequired(arr, 4))
+
+//9 8 6 7 7 2 9 2
+//9 1 10 8 6 4 8 6
+var arr = [[9, 9], [8, 1], [6, 10], [7, 8], [7, 6], [2, 4], [9, 8], [2, 6]]
+
+print(arr.minValue(arr))
+
+var map: Dictionary<String, Any> = ["1": ["2": "3"]] {
+    didSet {
+        print("didChange")
+    }
+}
+
+test(&map)
+
+func test(_ map:inout Dictionary<String, Any>) {
+    
+    map["10"] = "11"
+}

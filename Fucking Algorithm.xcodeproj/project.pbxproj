@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		502D851426E8555500DB9B90 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502D851326E8555500DB9B90 /* Array.swift */; };
 		5056A74A26FAC6E0008304B7 /* ListNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5056A74926FAC6E0008304B7 /* ListNote.swift */; };
+		50574B0027462D9700AD40E4 /* TreeNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50574AFF27462D9700AD40E4 /* TreeNote.swift */; };
 		508158F326EF2B73008EC416 /* Normal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508158F226EF2B73008EC416 /* Normal.swift */; };
 		5099B28B26F464B700ADCD69 /* LFUCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5099B28A26F464B700ADCD69 /* LFUCache.swift */; };
 		50E1865226FDB598008C538D /* FlattenNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E1865126FDB598008C538D /* FlattenNode.swift */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		502D851326E8555500DB9B90 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		5056A74926FAC6E0008304B7 /* ListNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNote.swift; sourceTree = "<group>"; };
+		50574AFF27462D9700AD40E4 /* TreeNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeNote.swift; sourceTree = "<group>"; };
 		508158F226EF2B73008EC416 /* Normal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Normal.swift; sourceTree = "<group>"; };
 		5099B28A26F464B700ADCD69 /* LFUCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFUCache.swift; sourceTree = "<group>"; };
 		50E1865126FDB598008C538D /* FlattenNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlattenNode.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				508158F226EF2B73008EC416 /* Normal.swift */,
 				5099B28A26F464B700ADCD69 /* LFUCache.swift */,
 				5056A74926FAC6E0008304B7 /* ListNote.swift */,
+				50574AFF27462D9700AD40E4 /* TreeNote.swift */,
 				50E1865126FDB598008C538D /* FlattenNode.swift */,
 			);
 			path = "Fucking Algorithm";
@@ -144,6 +147,7 @@
 				50E1865226FDB598008C538D /* FlattenNode.swift in Sources */,
 				50EFDED226E0ACDE0039AF96 /* String.swift in Sources */,
 				50EFDECB26E0ACC90039AF96 /* main.swift in Sources */,
+				50574B0027462D9700AD40E4 /* TreeNote.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
