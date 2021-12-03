@@ -9,6 +9,76 @@ import Cocoa
 
 extension Array {
     
+    // leecode 506. 相对名次
+    func findRelativeRanks(_ score: [Int]) -> [String] {
+        
+        var map = [Int:String]()
+        let scoreBySorted = score.sorted {
+            return $0 > $1
+        }
+        
+        for (i, n) in scoreBySorted.enumerated() {
+            switch i {
+            case 0: map[n] = "Gold Medal"
+            case 1: map[n] = "Silver Medal"
+            case 2: map[n] = "Bronze Medal"
+            default: map[n] = "\(i + 1)"
+            }
+        }
+        
+        return score.compactMap {
+            map[$0]
+        }
+
+//        var scoreMap = zip(0..., score).map { $0 }
+//
+//        scoreMap.sort { i, j in
+//            return i.1 > j.1
+//        }
+//
+//        var realMap = [(Int, String)]()
+//
+//        for i in 0..<scoreMap.count {
+//
+//            let val = scoreMap[i]
+//            let count = realMap.count + 1
+//            switch count {
+//            case 1:
+//                realMap.append((val.0, "Gold Medal"))
+//            case 2:
+//                realMap.append((val.0, "Silver Medal"))
+//            case 3:
+//                realMap.append((val.0, "Bronze Medal"))
+//            default:
+//                realMap.append((val.0, String(count)))
+//            }
+//        }
+//
+//        realMap.sort { i, j in
+//             return i.0 < j.0
+//        }
+//
+//        return realMap.map { $0.1 }
+    }
+    
+    // leecode 786. 第 K 个最小的素数分数
+    func kthSmallestPrimeFraction(_ arr: [Int], _ k: Int) -> [Int] {
+        
+        var frac = [(Int, Int)]()
+        
+        for i in 0..<arr.count {
+            for j in (i + 1)..<arr.count {
+                frac.append((arr[i], arr[j]))
+            }
+        }
+        
+        frac.sort { f, s in
+            return f.0*s.1 < f.1*s.0
+        }
+        
+        return [frac[k - 1].0, frac[k - 1].1]
+    }
+    
     // leecode 563. 二叉树的坡度
     func findTilt(_ root: TreeNode?) -> Int {
         
@@ -124,7 +194,6 @@ extension Array {
         var mask = [Int](repeating: 0, count: words.count)
         
         for (index, str) in zip(0..., words) {
-            
             
             for char in str {
                 mask[index] |= 1 << (char.asciiValue! - charZero)

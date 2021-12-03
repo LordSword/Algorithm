@@ -7,6 +7,48 @@
 
 import Foundation
 
+// leecode 400. 第 N 位数字
+func findNthDigit(_ n: Int) -> Int {
+    guard n > 9 else {
+        return n
+    }
+    
+    // 个位数 9
+    // 十位数 90*2
+    // 百位数 900*3
+    // 千··数 9000*4
+    // .....
+    
+    var tmp = n
+    var sum = 9
+    var count = 1
+    // 计算在哪个区间
+    while tmp - sum >= 0 {
+        tmp -= sum
+        sum = 9*Int(pow(10, count))*(count + 1)
+        count += 1
+    }
+    
+    // 数字前置数
+    let bit = Int(pow(10, count - 1))
+    // 从前置开始的第几个数字
+    let i = (tmp - 1)/count
+    // 实际数字
+    let num = bit + i
+    // 这个数字的第几位
+    let index = tmp%count == 0 ? count:tmp%count
+    
+    // 取出当前位数
+    var res = num
+    var j = 0
+    while count - j > index {
+        res /= 10
+        j += 1
+    }
+    
+    return res%10
+}
+
 // leecode 371 两整数之和，不使用 + - 符号
 func sumOfTwoNum(_ a:Int, _ b:Int) -> Int {
     if 0 == b {
