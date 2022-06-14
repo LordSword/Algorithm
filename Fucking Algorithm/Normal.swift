@@ -7,6 +7,43 @@
 
 import Foundation
 
+// leecode 1405
+func longestDiverseString(_ a: Int, _ b: Int, _ c: Int) -> String {
+    
+    var chars = [(a, "a"), (b, "b"), (c, "c")]
+    var res = [String]()
+    
+    repeat {
+        chars.sort {
+            $0.0 > $1.0
+        }
+        var hasNext = false
+        
+        for (index, (cnt, char)) in chars.enumerated() {
+            
+            if cnt <= 0 {
+                break
+            }
+            
+            if res.count >= 2, res[res.count - 2] == char, res[res.count - 1] == char {
+                continue
+            }
+            
+            hasNext = true
+            res.append(char)
+            
+            chars[index] = (cnt - 1, char)
+            break
+        }
+        
+        if !hasNext {
+            break
+        }
+    } while true
+    
+    return res.joined()
+}
+
 // leecode 400. 第 N 位数字
 func findNthDigit(_ n: Int) -> Int {
     guard n > 9 else {

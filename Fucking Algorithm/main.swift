@@ -65,5 +65,7 @@ import Foundation
 //let arr = [1,2,3,5]
 //print(arr.kthSmallestPrimeFraction(arr, 3))
 
-print(findNthDigit(1000))
+//print(findNthDigit(1000))
 
+let testArr = [[1,2,3],[4,5,6],[7,8,9]]
+print(testArr.findDiagonalOrder(testArr))

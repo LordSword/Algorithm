@@ -9,6 +9,138 @@ import Cocoa
 
 extension Array {
     
+    // leecode 498. 对角线遍历
+    func findDiagonalOrder(_ mat: [[Int]]) -> [Int] {
+        
+        var res = [Int]()
+        var x = 0, y = 0
+        
+        let m = mat.first!.count, n = mat.count
+        
+        var moveUp = true
+        
+        while x < m, y < n {
+            
+            res.append(mat[y][x])
+            if moveUp {
+                // 往右上移动
+                if (0 == y) || ( m - 1 == x) {
+                    // 无法再往上移动, 尝试往右或者往下移动
+                    if x == m - 1 {
+                        // 下移动
+                        y = y + 1
+                    } else {
+                        // 右移动
+                        x = x + 1
+                    }
+                    moveUp = false
+                } else {
+                    // 往右上移动
+                    x = x + 1
+                    y = y - 1
+                }
+            } else {
+                if (n - 1 == y) || (0 == x) {
+                    // 无法再往左下移动，尝试往右或者下移动
+                    if (n - 1 == y) {
+                        // 右移动
+                        x = x + 1
+                    } else {
+                        // 下移动
+                        y = y + 1
+                    }
+                    moveUp = true
+                } else {
+                    // 往左下移动
+                    x = x - 1
+                    y = y + 1
+                }
+            }
+        }
+                
+        return res
+    }
+    
+    // leecode 475. 供暖器
+    func findRadius(_ houses:inout [Int], _ heaters:inout [Int]) -> Int {
+        // 找出所有房屋与供暖器的距离
+        houses.sort{ i, j in  i < j }
+        heaters.sort{ i, j in  i < j }
+        
+        heaters.insert(Int.min, at:0)
+        heaters.append(Int.max)
+        
+        var cur = 0, res = 0
+        for i in 0..<houses.count {
+            
+            while cur < heaters.count {
+                if heaters[cur] >= houses[i] {
+                    break
+                }
+                cur += 1
+            }
+            
+            res = Swift.max(res, Swift.min(heaters[cur] - houses[i], houses[i] - heaters[cur - 1]))
+        }
+        return res
+    }
+    
+    // leecode 1610. 可见点的最大数目
+    func visiblePoints(_ points: [[Int]], _ angle: Int, _ location: [Int]) -> Int {
+        // 算出所有点的角度关系
+        // 根据角度排序
+        // 然后取线段最集中的范围
+        
+        var relativeAngles = [Double]()
+        var sameCount = 0
+                
+        for point in points {
+            
+            if point[0] == location[0], point[1] == location[1] {
+                sameCount += 1
+                continue
+            }
+            
+            let angVal = atan2( Double(point[1] - location[1]), Double(point[0] - location[0])) * 180 / Double.pi
+            
+            relativeAngles.append(angVal < 0 ? (angVal + 360):angVal)
+        }
+        
+        if 0 == relativeAngles.count {
+            return sameCount
+        }
+        
+        relativeAngles.sort { i, j in
+            i < j
+        }
+        
+        var res = 0
+        var pre = 0
+        var last = 1
+        let val = Double(angle)
+        
+        while pre < relativeAngles.count, last - pre <  relativeAngles.count {
+            
+            let tmpI = last % relativeAngles.count
+            let angVal = relativeAngles[tmpI] + (last >= relativeAngles.count ? 360:0)
+            
+            while pre < relativeAngles.count, angVal - relativeAngles[pre] > val {
+                pre += 1
+            }
+            
+//            if pre == relativeAngles.count {
+//                pre -= 1
+//            }
+            last += 1
+
+//            if (angVal - relativeAngles[pre] <= Double(angle)) {
+                res = Swift.max(res, last - pre)
+//            }
+        }
+        
+        return res + sameCount
+    }
+    
     // leecode 506. 相对名次
     func findRelativeRanks(_ score: [Int]) -> [String] {
         
