@@ -67,5 +67,36 @@ import Foundation
 
 //print(findNthDigit(1000))
 
-let testArr = [[1,2,3],[4,5,6],[7,8,9]]
-print(testArr.findDiagonalOrder(testArr))
+//let testArr = [[1,2,3],[4,5,6],[7,8,9]]
+//print(testArr.findDiagonalOrder(testArr))
+
+//var nums = [888, 666, 30, 1222, 2, 31, 4, 5, 0, 8, 7, 10]
+//Sort.insertionSort(nums: &nums)
+//Sort.shellSort(nums: &nums)
+//Sort.bubbleSort(nums: &nums)
+//Sort.selectionSort(nums: &nums)
+//Sort.heapSort(nums: &nums)
+//print(nums)
+// 1, 1, 2, 3, 5
+//print(test(4))
+
+//print(Sort.mergeSort(nums: nums))
+//print(Sort.radixSort(nums: nums))
+
+//var tmp = [62, 100, 4]
+//print(tmp.smallestDistancePair(tmp, 2))
+
+var tree = AVLTree()
+tree.insert(3)
+tree.insert(2)
+tree.insert(1)
+tree.insert(4)
+tree.insert(5)
+tree.insert(6)
+tree.insert(7)
+tree.insert(10)
+tree.insert(9)
+tree.insert(8)
+
+tree.printTree(tree.root)
+

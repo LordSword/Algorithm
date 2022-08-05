@@ -9,6 +9,79 @@ import Cocoa
 
 extension Array {
     
+    // 连续子数组的最大和
+    func maxSumInArray(_ nums: [Int]) -> Int {
+        // 贪心
+        guard nums.count > 1 else {
+            return 0
+        }
+        
+        var res = nums[0]
+        var sum = nums[0]
+        
+        for i in 1..<nums.count {
+            sum = Swift.max(nums[i], nums[i] + sum)
+            res = Swift.max(sum, res)
+        }
+        
+        return res
+                
+        // DP - 动态规划
+//        var dp = [Int](repeating: 0, count: nums.count)
+//        dp[0] = nums[0]
+//        var max = nums[0]
+//        
+//        for i in 1..<nums.count {
+//            dp[i] = Swift.max(nums[i], nums[i] + dp[i - 1])
+//            
+//            max = Swift.max(dp[i], max)
+//        }
+//        
+//        return max
+    }
+    
+    // leecode 719. 找出第 K 小的数对距离
+    func smallestDistancePair(_ nums: [Int], _ k: Int) -> Int {
+        // 暴力
+//        var distances = [Int]()
+//        for i in 0..<nums.count - 1 {
+//            for j in i + 1..<nums.count {
+//
+//                distances.append(abs(nums[i] - nums[j]))
+//            }
+//        }
+//
+//        distances.sort { $0 < $1 }
+//
+//        return distances[k - 1]
+        
+        // 二分 + 双指针
+        let numbers = nums.sorted { $0 < $1 }
+        
+        var left = 0, right = numbers.last! - numbers.first!
+        
+        while left < right {
+            let mid = (left + right)/2
+            var count = 0
+            
+            var i = 0
+            for j in 0..<numbers.count {
+                while numbers[j] - numbers[i] > mid {
+                    i = i + 1
+                }
+                count = count + j - i
+            }
+            
+            if count >= k {
+                right = mid - 1
+            } else {
+                left = mid + 1
+            }
+        }
+        
+        return left
+    }
+    
     // leecode 498. 对角线遍历
     func findDiagonalOrder(_ mat: [[Int]]) -> [Int] {
         

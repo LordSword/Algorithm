@@ -12,9 +12,11 @@
 		50574B0027462D9700AD40E4 /* TreeNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50574AFF27462D9700AD40E4 /* TreeNote.swift */; };
 		508158F326EF2B73008EC416 /* Normal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508158F226EF2B73008EC416 /* Normal.swift */; };
 		5099B28B26F464B700ADCD69 /* LFUCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5099B28A26F464B700ADCD69 /* LFUCache.swift */; };
+		50D9236C287C4691000618CB /* Balanced BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D9236B287C4691000618CB /* Balanced BinaryTree.swift */; };
 		50E1865226FDB598008C538D /* FlattenNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E1865126FDB598008C538D /* FlattenNode.swift */; };
 		50EFDECB26E0ACC90039AF96 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFDECA26E0ACC90039AF96 /* main.swift */; };
 		50EFDED226E0ACDE0039AF96 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFDED126E0ACDE0039AF96 /* String.swift */; };
+		50F9E43D2858A70D009BC385 /* Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F9E43C2858A70D009BC385 /* Sort.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,10 +37,12 @@
 		50574AFF27462D9700AD40E4 /* TreeNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeNote.swift; sourceTree = "<group>"; };
 		508158F226EF2B73008EC416 /* Normal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Normal.swift; sourceTree = "<group>"; };
 		5099B28A26F464B700ADCD69 /* LFUCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFUCache.swift; sourceTree = "<group>"; };
+		50D9236B287C4691000618CB /* Balanced BinaryTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Balanced BinaryTree.swift"; sourceTree = "<group>"; };
 		50E1865126FDB598008C538D /* FlattenNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlattenNode.swift; sourceTree = "<group>"; };
 		50EFDEC726E0ACC90039AF96 /* Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Test; sourceTree = BUILT_PRODUCTS_DIR; };
 		50EFDECA26E0ACC90039AF96 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		50EFDED126E0ACDE0039AF96 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		50F9E43C2858A70D009BC385 /* Sort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sort.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,11 +78,13 @@
 				50EFDECA26E0ACC90039AF96 /* main.swift */,
 				50EFDED126E0ACDE0039AF96 /* String.swift */,
 				502D851326E8555500DB9B90 /* Array.swift */,
+				50F9E43C2858A70D009BC385 /* Sort.swift */,
 				508158F226EF2B73008EC416 /* Normal.swift */,
 				5099B28A26F464B700ADCD69 /* LFUCache.swift */,
 				5056A74926FAC6E0008304B7 /* ListNote.swift */,
 				50574AFF27462D9700AD40E4 /* TreeNote.swift */,
 				50E1865126FDB598008C538D /* FlattenNode.swift */,
+				50D9236B287C4691000618CB /* Balanced BinaryTree.swift */,
 			);
 			path = "Fucking Algorithm";
 			sourceTree = "<group>";
@@ -142,12 +148,14 @@
 			files = (
 				5099B28B26F464B700ADCD69 /* LFUCache.swift in Sources */,
 				508158F326EF2B73008EC416 /* Normal.swift in Sources */,
+				50F9E43D2858A70D009BC385 /* Sort.swift in Sources */,
 				502D851426E8555500DB9B90 /* Array.swift in Sources */,
 				5056A74A26FAC6E0008304B7 /* ListNote.swift in Sources */,
 				50E1865226FDB598008C538D /* FlattenNode.swift in Sources */,
 				50EFDED226E0ACDE0039AF96 /* String.swift in Sources */,
 				50EFDECB26E0ACC90039AF96 /* main.swift in Sources */,
 				50574B0027462D9700AD40E4 /* TreeNote.swift in Sources */,
+				50D9236C287C4691000618CB /* Balanced BinaryTree.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
